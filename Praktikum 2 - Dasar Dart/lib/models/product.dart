@@ -24,6 +24,17 @@ class Product {
     print('Stok: $stock');
     print('Deskripsi: $description');
   }
+
+  // Method tambahan untuk mengembalikan String status berdasarkan jumlah stok
+  String getStatusStok() {
+    if (stock == 0) {
+      return 'Habis';
+    } else if (stock <= 5) {
+      return 'Stok Terbatas';
+    } else {
+      return 'Tersedia';
+    }
+  }
 }
 
 class DiscountedProduct extends Product {
@@ -76,9 +87,11 @@ void main() {
 
   print('=== Produk 1 ===');
   produk1.tampilkanInfo();
+  print('Status Stok: ${produk1.getStatusStok()}');
 
   print('\n=== Produk 2 ===');
   produk2.tampilkanInfo();
+  print('Status Stok: ${produk2.getStatusStok()}');
 
   DiscountedProduct produk3 = DiscountedProduct(
     id: 3,
@@ -95,4 +108,5 @@ void main() {
   produk3.tampilkanInfo();
   print('Diskon: ${produk3.discountPercent}%');
   print('Harga Final: Rp${produk3.hitungHargaFinal()}');
+  print('Status Stok: ${produk3.getStatusStok()}');
 }
