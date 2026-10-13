@@ -25,7 +25,6 @@ class Product {
     print('Deskripsi: $description');
   }
 
-  // Method tambahan untuk mengembalikan String status berdasarkan jumlah stok
   String getStatusStok() {
     if (stock == 0) {
       return 'Habis';
@@ -63,50 +62,4 @@ class DiscountedProduct extends Product {
     double potongan = price * discountPercent / 100;
     return price - potongan;
   }
-}
-
-void main() {
-  Product produk1 = Product(
-    id: 1,
-    name: 'PopMie',
-    price: 15000,
-    imageUrl: 'popmie.jpg',
-    category: 'Makanan',
-    stock: 10,
-    description: 'Mie instan rasa ayam bawang',
-  );
-
-  Product produk2 = Product(
-    id: 2,
-    name: 'Flower Bricks',
-    price: 70000,
-    imageUrl: 'flower_bricks.jpg',
-    category: 'Mainan lego berbentuk bunga',
-    stock: 20,
-  );
-
-  print('=== Produk 1 ===');
-  produk1.tampilkanInfo();
-  print('Status Stok: ${produk1.getStatusStok()}');
-
-  print('\n=== Produk 2 ===');
-  produk2.tampilkanInfo();
-  print('Status Stok: ${produk2.getStatusStok()}');
-
-  DiscountedProduct produk3 = DiscountedProduct(
-    id: 3,
-    name: 'Merche Bag',
-    price: 300000,
-    imageUrl: 'merche_bag.jpg',
-    category: 'Fashion',
-    stock: 5,
-    description: 'Tas kuliah warna maroon',
-    discountPercent: 20,
-  );
-
-  print('\n=== Produk Diskon ===');
-  produk3.tampilkanInfo();
-  print('Diskon: ${produk3.discountPercent}%');
-  print('Harga Final: Rp${produk3.hitungHargaFinal()}');
-  print('Status Stok: ${produk3.getStatusStok()}');
 }
