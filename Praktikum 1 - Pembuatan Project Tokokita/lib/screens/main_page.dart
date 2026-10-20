@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
+
 import 'home_page.dart';
+import 'cart_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -11,24 +14,13 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
+  late final List<Widget> _pages = [
     const HomePage(),
-
-    const Center(
-      child: Text(
-        'Halaman Keranjang',
-        style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
-    ),
-
+    const CartPage(),
     const Center(
       child: Text(
         'Halaman Profil',
-        style: TextStyle(
-          fontSize: 24,
-        ),
+        style: TextStyle(fontSize: 24),
       ),
     ),
   ];
@@ -37,16 +29,13 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
-
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

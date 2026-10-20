@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'controllers/cart_controller.dart';
 import 'screens/main_page.dart';
 import 'screens/product_detail_page.dart';
 import 'models/product.dart';
 
 void main() {
+  Get.put(CartController());
+
   runApp(const MyApp());
 }
 
@@ -12,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TokoKita',
 

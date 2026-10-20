@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controllers/cart_controller.dart';
 import '../models/product.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -14,24 +16,21 @@ class ProductDetailPage extends StatefulWidget {
       _ProductDetailPageState();
 }
 
-class _ProductDetailPageState
-    extends State<ProductDetailPage> {
+class _ProductDetailPageState extends State<ProductDetailPage> {
   int jumlah = 1;
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.find<CartController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Produk'),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16),
-
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start,
-
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               widget.product.name,
@@ -56,28 +55,17 @@ class _ProductDetailPageState
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),
-
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
-
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Kategori: '
-                      '${widget.product.category}',
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
+                      'Kategori: ${widget.product.category}',
+                      style: const TextStyle(fontSize: 16),
                     ),
-
                     const SizedBox(height: 8),
-
                     Text(
-                      'Status Stok: '
-                      '${widget.product.getStatusStok()}',
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
+                      'Status Stok: ${widget.product.getStatusStok()}',
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -99,17 +87,13 @@ class _ProductDetailPageState
             Text(
               widget.product.description ??
                   'Tidak ada deskripsi produk.',
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: const TextStyle(fontSize: 16),
             ),
 
             const Spacer(),
 
             Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween,
-
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
                   'Jumlah',
@@ -129,31 +113,23 @@ class _ProductDetailPageState
                               });
                             }
                           : null,
-
-                      icon: const Icon(
-                        Icons.remove,
-                      ),
+                      icon: const Icon(Icons.remove),
                     ),
 
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
                       ),
-
                       decoration: BoxDecoration(
                         border: Border.all(),
-                        borderRadius:
-                            BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-
                       child: Text(
                         '$jumlah',
                         style: const TextStyle(
                           fontSize: 18,
-                          fontWeight:
-                              FontWeight.bold,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -164,10 +140,7 @@ class _ProductDetailPageState
                           jumlah++;
                         });
                       },
-
-                      icon: const Icon(
-                        Icons.add,
-                      ),
+                      icon: const Icon(Icons.add),
                     ),
                   ],
                 ),
@@ -178,22 +151,16 @@ class _ProductDetailPageState
 
             SizedBox(
               width: double.infinity,
-
               child: ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.pop(
-                    context,
-                    jumlah,
-                  );
+                  for (int i = 0; i < jumlah; i++) {
+                    cartController.addToCart(widget.product);
+                  }
+
+                  Get.back(result: jumlah);
                 },
-
-                icon: const Icon(
-                  Icons.shopping_cart,
-                ),
-
-                label: const Text(
-                  'Tambah ke Keranjang',
-                ),
+                icon: const Icon(Icons.shopping_cart),
+                label: const Text('Tambah ke Keranjang'),
               ),
             ),
           ],
